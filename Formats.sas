@@ -7,12 +7,12 @@ run;
 
 proc means data=regmodel median;
     var rate;
-    where cohort > 200;
+    where cohort >= 200;
 run;
 
 proc means data=regmodel median;
     var rate;
-    where cohort > 400;
+    where cohort >= 400;
 run;
 
 proc format;
@@ -25,7 +25,7 @@ proc format;
     other = 'Over Median'
     ;
     value medfour
-    low -< 0.626 = 'Under Median'
+    low -< 0.625 = 'Under Median'
     other = 'Over Median'
     ;
 run;
