@@ -10,17 +10,18 @@ proc sql;
     create view RegModelPre as
     select gradrates.unitid, Rate, Cohort, /*From GradRates*/
                 iclevel, control, hloffer, locale, instcat, c21enprf, /*From Characteristics*/
-                uagrntn/scfa2 as GrantRate format=percentn8.2 
+                (uagrntn/scfa2) * 100 as GrantRate
                         label='Percent of undergraduate students awarded federal, state, local, institutional or other sources of grant aid',
-                uagrntt/scfa2 as GrantAvg  
+                (uagrntt/scfa2) / 1000 as GrantAvg  
                         label='Average amount of federal, state, local, institutional or other sources of grant aid awarded to undergraduate students',
-                upgrntn/scfa2 * 100 as PellRate format=percentn8.2 
+                (upgrntn/scfa2) * 100 as PellRate
                         label='Percent of undergraduate students awarded Pell grants',
-                ufloann/scfa2 as LoanRate format=percentn8.2 
+                (ufloann/scfa2) * 100 as LoanRate
                         label='Percent of undergraduate students awarded federal student loans',        
-                uagrntt/scfa2 as LoanAvg  
+                (uagrntt/scfa2) / 1000 as LoanAvg  
                         label='Average amount of federal student loans awarded to undergraduate students', scfa2, /*From Aid*/
-                tuition1, fee1, tuition2, fee2, tuition3, fee3, room, roomcap, board, roomamt, boardamt, /*From TuitionAndCosts*/
+                tuition1 / 1000 as tuition1, fee1 / 1000 as fee1, tuition2 / 1000 as tuition2, fee2 / 1000 as fee2, tuition3 / 1000 as tuition3,
+                 fee3 /1000 as fee3, room, roomcap, board, roomamt, boardamt, /*From TuitionAndCosts*/
                 totalSalary/TotalFaculty as AvgSalary label='Average Salary for 9-month faculty',
                 scfa2/TotalFaculty as StuFacRatio label='Student to Faculty Ratio' format=6.1
     from ipeds.gradrates, ipeds.characteristics, ipeds.aid, ipeds.tuitionandcosts, SalaryTot
