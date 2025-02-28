@@ -21,8 +21,8 @@ proc sql;
                 (uagrntt/scfa2) / 1000 as LoanAvg  
                         label='Average amount of federal student loans awarded to undergraduate students', scfa2, /*From Aid*/
                 tuition1 / 1000 as tuition1, fee1 / 1000 as fee1, tuition2 / 1000 as tuition2, fee2 / 1000 as fee2, tuition3 / 1000 as tuition3,
-                 fee3 /1000 as fee3, room, roomcap, board, roomamt, boardamt, /*From TuitionAndCosts*/
-                totalSalary/TotalFaculty as AvgSalary label='Average Salary for 9-month faculty',
+                 fee3 /1000 as fee3, room, roomcap, board, roomamt / 1000, boardamt / 1000, /*From TuitionAndCosts*/
+                (totalSalary/TotalFaculty) / 1000 as AvgSalary label='Average Salary for 9-month faculty',
                 scfa2/TotalFaculty as StuFacRatio label='Student to Faculty Ratio' format=6.1
     from ipeds.gradrates, ipeds.characteristics, ipeds.aid, ipeds.tuitionandcosts, SalaryTot
     where gradrates.unitid eq characteristics.unitid eq aid.unitid eq tuitionandcosts.unitid eq SalaryTot.unitid
