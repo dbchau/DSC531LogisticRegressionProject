@@ -14,7 +14,7 @@ proc sql;
                         label='Percent of undergraduate students awarded federal, state, local, institutional or other sources of grant aid',
                 uagrntt/scfa2 as GrantAvg  
                         label='Average amount of federal, state, local, institutional or other sources of grant aid awarded to undergraduate students',
-                upgrntn/scfa2 as PellRate format=percentn8.2 
+                upgrntn/scfa2 * 100 as PellRate format=percentn8.2 
                         label='Percent of undergraduate students awarded Pell grants',
                 ufloann/scfa2 as LoanRate format=percentn8.2 
                         label='Percent of undergraduate students awarded federal student loans',        
